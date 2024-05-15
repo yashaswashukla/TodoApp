@@ -1,6 +1,6 @@
-import express from "express";
-import { createTodo, updateTodo } from "./types.js";
-import { todo } from "./db.js";
+const express = require("express");
+const { createTodo, updateTodo } = require("./types.js");
+const { todo } = require("./db.js");
 
 const app = express();
 
@@ -23,7 +23,6 @@ app.post("/todo", async (req, res) => {
 
 app.get("/todos", async (req, res) => {
   const todos = await todo.find({});
-  console.log(todos);
   res.json({ todos });
 });
 

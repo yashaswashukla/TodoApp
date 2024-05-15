@@ -5,9 +5,11 @@
  *  completed: boolean
  * }
  */
-import mongoose from "mongoose";
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGOOSE_CONNECT_URL);
+const uri = process.env.DATABASE_URL;
+mongoose.connect(uri);
 const todoSchema = mongoose.Schema({
   title: String,
   description: String,
