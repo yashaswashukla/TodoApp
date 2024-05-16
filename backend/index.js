@@ -4,6 +4,18 @@ const { todo } = require("./db.js");
 
 const app = express();
 
+// Allow from all the frontends
+const cors = require("cors");
+app.use(cors());
+
+// Allowing only restricted amount of front-ends
+/**
+ * const cors = require("cors")
+ * app.use(cors({
+ * origin: "http://localhost:5173"
+ * }))
+ */
+
 app.use(express.json());
 
 app.post("/todo", async (req, res) => {
