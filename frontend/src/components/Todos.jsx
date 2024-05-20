@@ -1,27 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Todos({ todos }) {
+let Todos = ({ title, description, completed }) => {
+  const [complete, setComplete] = useState(completed);
+
   let changeData = () => {
-    const btn = document.getElementById("change").value;
-    if (btn === "Mark as Complete")
-      document.getElementById("change").innerHTML = "Completed";
-    return;
+    setComplete(complete === true ? false : true);
   };
   return (
     <div>
-      {todos.map((ele) => {
-        return (
-          <div>
-            <h1>ele.title</h1>
-            <h2>ele.description</h2>
-            <button id="change" onClick={changeData}>
-              {ele.completed === true ? "Completed" : "Mark as Complete"}
-            </button>
-          </div>
-        );
-      })}
+      <h1>{title}</h1>
+      <h2>{description}</h2>
+      <button id="change" onClick={changeData}>
+        {complete === true ? "Completed" : "Mark as complete"}
+      </button>
     </div>
   );
-}
+};
 
 export default Todos;

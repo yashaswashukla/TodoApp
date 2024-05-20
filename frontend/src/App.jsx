@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import CreateTodo from "./components/CreateTodo";
 import Todos from "./components/Todos";
 
-function App() {
+let App = () => {
   const [todos, setTodos] = useState([]);
-
-  fetch("http://localhost:3000/todos").then(async function (res) {
-    const json = await res.json();
-    setTodos(json.todos);
-  });
+  useEffect(() => {
+    fetch("http://localhost:3000/todos").then(async (res) => {
+      const list = await res.json();
+      setTodos(list.todos);
+    });
+  }, []);
   return (
     <>
       <CreateTodo />
-      <Todos todos={todos} />
+      {todos.map((ele) => (
+        <Todos
+          key={ele.id}
+          title={ele.title}
+          description={ele.description}
+          completed={ele.completed}
+          setTodos={setTodos}
+        />
+      ))}
     </>
   );
-}
+};
 
 export default App;
